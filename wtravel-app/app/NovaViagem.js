@@ -2,20 +2,33 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component, useState  } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput , Button, Alert } from 'react-native';
 import { format } from 'date-fns';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import MainFund from '../componentes/MainFund';
 
 export default function Principal() {
-  const confirmar = () => {
-    Alert.alert('Viagem agendada!');
-  }
 
   const [text1, setText1] = useState('');
   const [text2, setText2] = useState('');
   const [numeric, setNumeric] = useState('');
 
   const [date, setDate] = useState(new Date());
+
+  const confirmar = async () => {
+        // Salvar os dados da viagem no AsyncStorage
+        const viagem = {
+            data: format(date, 'dd/MM/yyyy'),
+            local: text1,
+            transporte: text2,
+            valor: numeric
+        };
+
+        // Convertendo para string antes de salvar no AsyncStorage
+        await AsyncStorage.setItem('viagem', JSON.stringify(viagem));
+
+        Alert.alert('Viagem agendada!');
+};
 
   const handleSubmit = () => {
     // Aqui, você pode lidar com os dados do formulário, como enviar para um servidor ou processá-los localmente.
@@ -24,6 +37,8 @@ export default function Principal() {
     console.log('Texto 2:', text2);
     console.log('Valor Numérico:', numeric);
   };
+
+
 
   return (
     <View style={styles.container}>

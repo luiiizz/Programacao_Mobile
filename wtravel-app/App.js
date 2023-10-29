@@ -14,11 +14,37 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Principal">
-        <Stack.Screen name="Principal" component={Principal} />
-        <Stack.Screen name="ProximasViagens" component={ProximasViagens} />
-        <Stack.Screen name="NovaViagem" component={NovaViagem} />
+        <Stack.Screen name="Principal" 
+                      component={Principal} 
+                      options={{
+                        title: 'Principal',
+                        headerStyle: styles.headerTitles,
+                      }}
+        />
+        <Stack.Screen name="ProximasViagens" 
+                      component={ProximasViagens} 
+                      options={{
+                        title: 'Proximas Viagens',
+                        headerStyle: styles.headerTitles,
+                      }}
+        />
+        <Stack.Screen name="NovaViagem" 
+                      component={NovaViagem} 
+                      options={{
+                        title: 'Nova Viagem',
+                        headerStyle: styles.headerTitles,
+                      }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+
+      headerTitles: {
+        backgroundColor: '#00D26D',
+      }
+
+});
 
